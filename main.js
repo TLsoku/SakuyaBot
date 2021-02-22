@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
+const Sequelize = require('sequelize');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -18,12 +19,43 @@ for (const folder of commandFolders) {
 
 const cooldowns = new Discord.Collection();
 
+const sequelize = new Sequelize('database', 'user', 'password', {
+	host: 'localhost',
+	dialect: 'sqlite',
+	logging: false,
+	// SQLite only
+	storage: 'database.sqlite',
+});
+
+/*
+ * equivalent to: CREATE TABLE tags(
+ * name VARCHAR(255),
+ * description TEXT,
+ * username VARCHAR(255),
+ * usage INT
+ * );
+ */
+const Tags = sequelize.define('tags', {
+	name: {
+		type: Sequelize.STRING,
+		unique: true,
+	},
+	description: Sequelize.TEXT,
+	username: Sequelize.STRING,
+	usage_count: {
+		type: Sequelize.INTEGER,
+		defaultValue: 0,
+		allowNull: false,
+	},
+});
+
 client.once('ready', () => {
+	Tags.sync();
 	console.log('MEIDO KNEESOCK PADCHOU');
 });
 
 
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	//lower case check + split arguments
@@ -55,7 +87,7 @@ client.on('message', message => {
 
 	//run command
 	try {
-		command.execute(message, args);
+		await command.execute(message, args);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
