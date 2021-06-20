@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
+const fetch = require('node-fetch');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -23,7 +24,7 @@ client.once('ready', () => {
 });
 
 
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	//lower case check + split arguments
@@ -52,6 +53,13 @@ client.on('message', message => {
 		}
 	}
 
+
+	if (command === 'cat') {
+		message.channel.send('getcat');
+		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
+
+		message.channel.send(file);
+	}
 
 	//run command
 	try {
