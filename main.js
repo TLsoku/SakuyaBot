@@ -53,14 +53,6 @@ client.on('message', async message => {
 		}
 	}
 
-
-	if (command === 'cat') {
-		message.channel.send('getcat');
-		const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
-
-		message.channel.send(file);
-	}
-
 	//run command
 	try {
 		command.execute(message, args);

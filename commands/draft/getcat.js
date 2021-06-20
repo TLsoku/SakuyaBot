@@ -1,13 +1,14 @@
 
+const fetch = require("node-fetch");
 module.exports = {
 	name: 'getcat',
 	description: 'post cat',
-	execute(message, args) {
+	execute: async (message, args) => {
 		message.channel.send('getcat');
-/*
-        const { file } = fetch('https://aws.random.cat/meow').then(response => response.json());
+
+        const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
 		message.channel.send(file);
-        */
+        
 	},
 };
 
