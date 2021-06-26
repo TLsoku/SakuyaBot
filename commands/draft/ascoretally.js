@@ -10,17 +10,18 @@ module.exports = {
 			message.channel.send('No anime ID');
 			return;
 		}
+		
+		var totalScore = 0;
+		for (let i = 0; i < args.length; i++){
+			var URL = "https://api.jikan.moe/v3/anime/" + args[i];
+			message.channel.send(URL);
+			const jsonIn = await fetch(URL).then(res => res.json()).then(data => { 
+				console.log(data.score);
+				totalScore += data.score;
+			 })
+		}
 
-		message.channel.send(`Anime ID: ${args[0]}`);
-		var URL = "https://api.jikan.moe/v3/anime/" + args[0];
-		message.channel.send(URL);
-		const jsonIn = await fetch(URL).then(res => res.json()).then(data => { 
-			console.log(data)
-			console.log(data.score);
-			message.channel.send("The anime score: " + data.score);
-		 })
-		 // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-
+		message.channel.send(totalScore);
         
 	},
 
