@@ -17,7 +17,8 @@ module.exports = {
 		const jsonIn = await fetch(URL).then(res => res.json()).then(data => { 
 			console.log(data)
 			console.log(data.score);
-			message.channel.send("The anime score: " + data.score);
+			message.channel.send("MAL Score: " + data.score);
+			message.channel.send("Points for this anime: " + Math.round(data.score*10-70));
 		 })
 		 // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
