@@ -12,16 +12,19 @@ module.exports = {
 		}
 		
 		var totalScore = 0;
+		
 		for (let i = 0; i < args.length; i++){
 			var URL = "https://api.jikan.moe/v3/anime/" + args[i];
-			message.channel.send(URL);
+			//message.channel.send(URL);
 			const jsonIn = await fetch(URL).then(res => res.json()).then(data => { 
 				console.log(data.score);
-				totalScore += data.score;
+				message.channel.send("MAL Score: " + data.score);
+				message.channel.send("Points for this anime: " + Math.round(data.score*10-70));
+				totalScore += Math.round(data.score*10-70);
 			 })
 		}
 
-		message.channel.send(totalScore);
+		message.channel.send("Total score: " + totalScore);
         
 	},
 

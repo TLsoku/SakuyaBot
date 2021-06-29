@@ -13,7 +13,7 @@ module.exports = {
 
 		message.channel.send(`Anime ID: ${args[0]}`);
 		var URL = "https://api.jikan.moe/v3/anime/" + args[0];
-		message.channel.send(URL);
+		//message.channel.send(URL);
 		const jsonIn = await fetch(URL).then(res => res.json()).then(data => { 
 			console.log(data)
 			console.log(data.score);
