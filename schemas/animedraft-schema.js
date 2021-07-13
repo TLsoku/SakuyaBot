@@ -6,15 +6,16 @@ const userIDString = {
     primaryKey: true
 }
 
-const reqString = {
-    type: String,
-    required: true
-}
-
 const animedraftSchema = mongoose.Schema({
     userID: userIDString,
-    anime1: reqString,
-
+    anime1: String,
+    anime2: String,
+    anime3: String,
+    anime4: String,
+    anime5: String,
+    anime6: String,
+    antipick1: String,
+    antipick2: String    
 })
 
 module.exports = mongoose.model("animedraft", animedraftSchema);
