@@ -3,6 +3,7 @@ const fetch = require("node-fetch");
 module.exports = {
 	name: 'ascore',
 	description: 'return anime score from MAL',
+	cooldown: 5,
 	args: true,
 	execute: async (message, args) => {
 		
