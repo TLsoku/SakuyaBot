@@ -2,6 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 const fetch = require('node-fetch');
+const mongo = require('./mongo');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -19,8 +20,17 @@ for (const folder of commandFolders) {
 
 const cooldowns = new Discord.Collection();
 
-client.once('ready', () => {
+client.once('ready', async () => {
 	console.log('MEIDO KNEESOCK PADCHOU');
+
+	await mongo().then(mongoose => {
+		try{
+			console.log("Mongo connected");
+		} finally {
+			mongoose.connection.close();
+		}
+	})
+
 });
 
 
