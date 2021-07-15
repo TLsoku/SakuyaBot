@@ -13,7 +13,6 @@ const animedraftSchema = mongoose.Schema({
     anime3: String,
     anime4: String,
     anime5: String,
-    anime6: String,
     antipick1: String,
     antipick2: String    
 })
