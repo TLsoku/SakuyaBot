@@ -10,9 +10,11 @@ module.exports = {
 		console.log("Add anime user: " + message.author.id + ". anime: " + args[0]);
 
 		if(args[0]==0 || !args[0]){
-			message.channel.send('No anime ID');
+			message.channel.send("No anime ID");
 			return;
 		}
+        
+        message.channel.send("Anime: " + args[0] + " added");
 
         await mongo().then(async (mongoose) => {
             try {
