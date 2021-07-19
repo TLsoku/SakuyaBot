@@ -22,7 +22,6 @@ const cooldowns = new Discord.Collection();
 
 client.once('ready', async () => {
 	console.log('MEIDO KNEESOCK PADCHOU');
-
 	await mongo().then(mongoose => {
 		try{
 			console.log("Mongo connected");

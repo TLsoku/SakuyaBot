@@ -17,4 +17,4 @@ const animedraftSchema = mongoose.Schema({
     antipick2: String    
 })
 
-module.exports = mongoose.model("animedraft", animedraftSchema);
+module.exports = mongoose.model("animeDraft", animedraftSchema);
