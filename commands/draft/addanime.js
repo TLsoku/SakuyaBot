@@ -18,10 +18,32 @@ module.exports = {
 
         await mongo().then(async (mongoose) => {
             try {
-                await new animedraftSchema({
-                    userID: message.author.id,
-                    anime1: args[0],
-                }).save()
+                console.log("findOne");
+                const authorID = message.author.id;
+
+                
+                const result = await animedraftSchema.findOneAndUpdate({
+                    userID: authorID
+                }, {
+                    anime1: args[0]
+                }, {
+                    upsert: true
+                })
+
+
+                // const result = await animedraftSchema.findOne({
+                //     userID: authorID
+                // })
+                // console.log("result: " + result);
+
+                // if(result){
+                //     result.anime1 = args[0];
+                // } else {
+                //     await new animedraftSchema({
+                //     userID: authorID,
+                //     anime1: args[0],
+                //     }).save()
+                // }
             } finally {
                 mongoose.connection.close()
             }
