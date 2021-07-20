@@ -51,7 +51,7 @@ module.exports = {
             }
         })
 
-        message.channel.send("Anime: " + args[0] + " added to slot " + args[1]);
+        message.channel.send("Anime: " + args[1] + " is now in slot " + args[0]);
 
 	},
 
