@@ -8,20 +8,22 @@ module.exports = {
 	execute: async (message, args) => {
 
 		console.log("Add anime user: " + message.author.id + ". anime: " + args[0]);
-
+        //Format: addanime [slot] [anime]
 		if(args[0]==0 || !args[0]){
-			message.channel.send("No anime ID");
+			message.channel.send("No slot specified");
 			return;
 		}
-        
-        message.channel.send("Anime: " + args[0] + " added");
+
+        if(args[1]==0 || !args[1]){
+			message.channel.send("No anime specified");
+			return;
+		}
 
         await mongo().then(async (mongoose) => {
             try {
-                console.log("findOne");
                 const authorID = message.author.id;
 
-                
+
                 const result = await animedraftSchema.findOneAndUpdate({
                     userID: authorID
                 }, {
@@ -48,6 +50,9 @@ module.exports = {
                 mongoose.connection.close()
             }
         })
+
+        message.channel.send("Anime: " + args[0] + " added to slot " + args[1]);
+
 	},
 
 };
